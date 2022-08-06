@@ -1,0 +1,10 @@
+.score {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 20px 30px;
+  pointer-events: none;
+  font-family: monospace;
+  font-size: 25px;
+  z-index: 10;
+}

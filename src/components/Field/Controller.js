@@ -24,6 +24,13 @@ export default class Controller {
       newSnake.pop();
     }
 
+    for (let i = 1; i < newSnake.length; ++i) {
+      if(newSnake[0].x == newSnake[i].x && newSnake[0].y == newSnake[i].y) {
+        newSnake.length = i;
+        break;
+      }
+    }
+
     return newSnake;
   }
 
