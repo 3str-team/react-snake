@@ -1,0 +1,2 @@
+*{box-sizing:border-box;margin:0;padding:0}.App,.root,body,html{background:#f7f7f7;display:grid;min-height:100vh;place-items:center;width:100%}.cell{position:absolute}.cell-none{background:transparent}.cell-head,.cell-snake{background:#161a1d}.cell-head{opacity:.7}.cell-eat{background:#e5383b}.field{background:#f5f3f4;display:flex;flex-wrap:wrap;outline:3px solid #161a1d;position:relative}
+/*# sourceMappingURL=main.5208eae1.css.map*/
