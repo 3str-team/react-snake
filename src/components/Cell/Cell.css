@@ -1,0 +1,20 @@
+.cell {
+  position: absolute;
+}
+
+.cell-none {
+  background: transparent;
+}
+
+.cell-snake,
+.cell-head {
+  background: #161a1d;
+}
+
+.cell-head {
+  opacity: 0.7;
+}
+
+.cell-eat {
+  background: #e5383b;
+}
