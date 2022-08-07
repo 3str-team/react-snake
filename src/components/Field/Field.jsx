@@ -4,40 +4,41 @@ import { useState } from "react";
 import useCells from "../../hooks/useCells";
 import config from "../../config";
 import "./Field.css";
-import Controller from "./Controller";
+import Snake from "./Snake";
 import useVector from "../../hooks/useVector";
 import useEat from "../../hooks/useEat";
 import useDelay from "../../hooks/useDelay";
 import Score from "../Score/Score";
 import useScore from "../../hooks/useScore";
+import useEnemyList from "../../hooks/useEnemyList";
+import useBlocks from "../../hooks/useBlocks";
 
-const startLength = (length) =>  {
+const startLength = (length) => {
   let list = [];
-  for(let i = 0; i < length; ++i) {
-    list.unshift(
-      {x: i, y: 0}
-    )
+  for (let i = 0; i < length; ++i) {
+    list.unshift({ x: i, y: 0 });
   }
   return list;
-}
+};
 
 const Field = ({ width, height }) => {
-  const [snake, setSnake] = useState(startLength(4));
-  
+  const [snake, setSnake] = useState(startLength(config.startLength));
   const eat = useEat(snake);
-  const delay = useDelay(eat);
-  const cells = useCells(snake, eat);
+  // const enemyList = useEnemyList(snake, eat)
   const score = useScore(snake);
-  
+  const blocks = useBlocks(snake, eat, score);
+  const delay = useDelay(eat);
+  const cells = useCells(snake, eat, blocks);
+
   const vector = useVector();
 
   useEffect(() => {
     let t = setInterval(() => {
-        setSnake(Controller.move(snake, vector, eat));
+      setSnake(Snake.move(snake, vector, eat, blocks));
     }, delay);
     return () => {
-        clearInterval(t);
-    }
+      clearInterval(t);
+    };
   }, [snake]);
 
   return (

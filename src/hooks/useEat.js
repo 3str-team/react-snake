@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import config from "../config";
-
-const rand = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
+import rand from "../helpers/randomFunc";
 
 const randomPlace = (snake) => {
   let newEat = { x: rand(0, config.w - 1), y: rand(0, config.h - 1) };

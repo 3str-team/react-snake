@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import config from "../config";
-
-const rand = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
+import rand from "../helpers/randomFunc";
 export default function useDelay(eat) {
   const [delay, setDelay] = useState(rand(config.minDelay, config.maxDelay));
 

@@ -8,8 +8,5 @@ export default function useScore(snake) {
     setScore(snake.length);
   }, [snake]);
 
-  useEffect(() => {
-    setScore(0);
-  }, []);
   return score;
 }

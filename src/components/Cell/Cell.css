@@ -18,3 +18,7 @@
 .cell-eat {
   background: #e5383b;
 }
+
+.cell-block {
+  background: gray;
+}
