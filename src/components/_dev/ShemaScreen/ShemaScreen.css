@@ -1,0 +1,26 @@
+.ss {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  opacity: 0.15;
+  padding: 10px;
+  background: #e8e8e8;
+  font-size: 12px;
+}
+
+.ss table {
+  border-spacing: 0;
+}
+
+.ss table td {
+  width: 10px;
+  height: 10px;
+}
+
+.ss table td.color {
+  background: black;
+}
+
+.ss table td.tp {
+  outline: 1px solid black;
+}

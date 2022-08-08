@@ -44,7 +44,12 @@ export default class Snake {
 
     for (let i = 0; i < blocks.length; ++i) {
       if (newSnake[0].x == blocks[i].x && newSnake[0].y == blocks[i].y) {
-        newSnake.length = Math.max(newSnake.length - 5, 2);
+        blocks[i].customDamage != undefined
+          ? (newSnake.length = Math.max(
+              newSnake.length - blocks[i]?.customDamage,
+              2
+            ))
+          : (newSnake.length = Math.max(newSnake.length - config.fine, 2));
         break;
       }
     }

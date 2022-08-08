@@ -24,77 +24,86 @@ export default class Enemy {
       for (let j = 0; j < busyPlaces.length; ++j) {
         if (
           abstraction[i].x == busyPlaces[j].x &&
-          abstractio[i].y == busyPlaces[j].y
+          abstraction[i].y == busyPlaces[j].y
         ) {
           return false;
         }
       }
     }
-    return abstraction;
+    return true;
+  }
+
+  static setSaveRadius(snakeHead) {
+    let res = [];
+    for (let i = 1; i <= config.saveRadius; ++i) {
+      res.push({
+        x: snakeHead.x + i,
+        y: snakeHead.y,
+      });
+      res.push({
+        x: snakeHead.x,
+        y: snakeHead.y + i,
+      });
+      res.push({
+        x: snakeHead.x - i,
+        y: snakeHead.y,
+      });
+      res.push({
+        x: snakeHead.x,
+        y: snakeHead.y - i,
+      });
+    }
+    return res;
   }
 
   static createWall(busyPlaces) {
-    const wallAbstraction = (position) => {
+    const findFreePlace = (attempt) => {
+      if (attempt > 10) {
+        return [];
+      }
+      const coords = {
+        x: rand(1, config.w - 2),
+        y: 0,
+      };
       let abstraction = [];
-      let coord;
-      switch (position) {
-        case 1:
-          coord = {
-            x: rand(1, config.w - 2),
-            y: 0,
-          };
-          abstraction.push({ x: coord.x - 1, y: coord.y });
-          abstraction.push({ x: coord.x, y: coord.y });
-          abstraction.push({ x: coord.x + 1, y: coord.y });
-          for (let i = 3; i < config.h; ++i) {
-            abstraction.push({ x: coord.x, y: i });
-          }
-          break;
-        case 2:
-          coord = {
-            x: config.w - 1,
-            y: rand(1, config.h - 2),
-          };
-          abstraction.push({ x: coord.x, y: coord.y - 1 });
-          abstraction.push({ x: coord.x, y: coord.y });
-          abstraction.push({ x: coord.x, y: coord.y + 1 });
-          for (let i = 0; i < config.w - 3; ++i) {
-            abstraction.push({ x: i, y: coord.y });
-          }
-          break;
-        case 3:
-          coord = {
-              x: rand(1, config.w - 2),
-              y: config.h - 1,
-          };
-          abstraction.push({ x: coord.x + 1, y: coord.y });
-          abstraction.push({ x: coord.x, y: coord.y });
-          abstraction.push({ x: coord.x - 1, y: coord.y });
-          for (let i = 0; i < config.h - 3; ++i) {
-            abstraction.push({ x: coord.x, y: i });
-          }
-          break;
-        case 4:
-            coord = {
-                x: 0,
-                y: rand(1, config.h - 2),
-            };
-          abstraction.push({ x: coord.x, y: coord.y + 1 });
-          abstraction.push({ x: coord.x, y: coord.y });
-          abstraction.push({ x: coord.x, y: coord.y - 1 });
-          for (let i = 3; i < config.h; ++i) {
-            abstraction.push({ x: i, y: coord.y });
-          }
-          break;
+
+      for (let i = -2; i <= 2; ++i) {
+        abstraction.push({
+          x: coords.x + i,
+          y: coords.y,
+          bg: "#8EB1C7",
+        });
       }
 
-      if(!Enemy.checkCorrectPosition(busyPlaces, abstraction)) {
-        return wallAbstraction(position);
+      for (let i = 3; i < config.h; ++i) {
+        abstraction.push({
+          x: coords.x,
+          y: i,
+          bg: "red",
+          customDamage: 4,
+        });
       }
-      return abstraction;
+      abstraction = [...abstraction, ...Enemy.setSaveRadius(abstraction[0])];
+      for (let i = 1; i <= 2; ++i) {
+        for (let j = -2; j <= 2 ; ++j) {
+          abstraction.push({
+            x: coords.x + j,
+            y: coords.y + i,
+          });
+        }
+      }
+
+      if (Enemy.checkCorrectPosition(busyPlaces, abstraction)) {
+        for (let i = 0; i < config.saveRadius * 4 + 10; ++i) {
+          abstraction.pop();
+        }
+        return abstraction;
+      } else {
+        return findFreePlace(attempt + 1);
+      }
     };
 
-    const position = rand(1, 4);
-    return
+    const position = 1;
+    return findFreePlace(1);
   }
 }

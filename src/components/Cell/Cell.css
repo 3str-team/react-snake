@@ -2,13 +2,10 @@
   position: absolute;
 }
 
-.cell-none {
-  background: transparent;
-}
-
 .cell-snake,
 .cell-head {
   background: #161a1d;
+  z-index: 5;
 }
 
 .cell-head {
@@ -16,7 +13,7 @@
 }
 
 .cell-eat {
-  background: #e5383b;
+  background: #38e555;
 }
 
 .cell-block {

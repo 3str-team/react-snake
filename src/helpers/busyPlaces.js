@@ -1,10 +1,9 @@
-const busyPlaces = (eat, snake = [], blocks = []) => {
+const busyPlaces = (arrays, eat, options = {}) => {
   let res = [];
-  for (let i = 0; i < snake.length; ++i) {
-    res.push(snake[i]);
-  }
-  for (let i = 0; i < blocks.length; ++i) {
-    res.push(blocks[i]);
+  for (let i = 0; i < arrays.length; ++i) {
+    for (let j = 0; j < arrays[i].length; ++j) {
+      res.push(arrays[i][j]);
+    }
   }
   res.push(eat);
   return res;

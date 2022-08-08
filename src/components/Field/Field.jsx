@@ -12,6 +12,8 @@ import Score from "../Score/Score";
 import useScore from "../../hooks/useScore";
 import useEnemyList from "../../hooks/useEnemyList";
 import useBlocks from "../../hooks/useBlocks";
+import ShemaScreen from "../_dev/ShemaScreen/ShemaScreen";
+import busyPlaces from "../../helpers/busyPlaces";
 
 const startLength = (length) => {
   let list = [];
@@ -44,6 +46,7 @@ const Field = ({ width, height }) => {
   return (
     <div className="field" style={{ width, height }}>
       <Score score={score} />
+      {/* <ShemaScreen bp={busyPlaces([snake, blocks], eat)} /> */}
       {cells.map((cell) => {
         return cell;
       })}

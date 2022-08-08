@@ -17,8 +17,8 @@ export default function useEat(snake) {
   useEffect(() => {
     if (eat.x == snake[0].x && snake[0].y == eat.y) {
       setEat(randomPlace(snake));
-      // console.log(eat);
     }
+    // console.log(eat);
   }, [snake]);
   return eat;
 }
